@@ -1,6 +1,6 @@
 {
 	"name": "DragAndDropUpload",
-	"version": "0.1.0",
+	"version": "0.1.2",
 	"author": [
 		"[http://kwiki.co.il Kwiki]",
 		"[[mw:user:HagaiAsaban|Hagai Asaban]]",
@@ -29,16 +29,34 @@
 	"ResourceModules": {
 		"ext.DragAndDropUpload": {
 			"dependencies": [
-				
+				"oojs",
+				"oojs-ui",
+				"oojs-ui-core",
+				"oojs-ui-widgets",
+				"oojs-ui.styles.icons",
+				"mediawiki.Upload",
+				"mediawiki.Upload.Dialog",
+				"mediawiki.api",
+				"mediawiki.widgets"
 			],
 			"scripts": [
+				"lib/simply-toast.min.js",
+				"lib/sweetalert.min.js",
+				"modules/materialDialog.js",
 				"modules/ext.DragAndDropUpload.js"
 			],
 			"styles": [
+				"lib/simply-toast.min.css",
+				"lib/sweetalert.min.css",
 				"modules/ext.DragAndDropUpload.css"
 			],
 			"messages": [
-
+				"modal-close-button",
+				"redirect-files-list",
+				"uploaded-successfully",
+				"modal-upload-label-button",
+				"upload-files-dialog-title",
+				"modal-popup-warning-file-missing"
 			]			
 		}
 	},

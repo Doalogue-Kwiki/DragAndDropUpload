@@ -1,29 +1,88 @@
 /**
- * JavaScript for Accessibility Menu
+ * JavaScript for Drag And Drop Upload
  */
 ( function ( mw, $ ) {
     
     function loadDragAndDropUpload() {
-		//var menu = mw.template.get( "ext.MaterialFAB", "menu.mustache" );
-		/*var file = new OO.ui.SelectFileWidget(),
-		button = new OO.ui.ButtonWidget( { label: 'Save' } ),
-		upload = new mw.Upload;
 
-		button.on( 'click', function () {
-		  upload.setFile( file.getValue() );
-		  upload.setFilename( file.getValue().name );
-		  upload.upload();
-		} );*/
+		var file = new OO.ui.SelectFileWidget( {
+			id: "modal-select-file",
+			showDropTarget: true,
+			droppable: true
+		} );
+		var upload = new mw.Upload;
 		
-		var uploadDialog = new mw.Upload.Dialog();
-		var windowManager = new OO.ui.WindowManager();
-		$( "#content" ).append( windowManager.$element );
+		var dialogActionButtons = [ 
+		{
+			id: "model-upload-button",
+			action: 'upload',
+			framed: false,			
+			icon: 'check',
+			label: mw.msg("modal-upload-label-button"),
+			iconTitle: mw.msg("modal-upload-label-button"),
+			flags: [ 'primary', 'progressive' ] 
+		},
+		{ 
+			id: "model-close-button",
+			action: 'close',
+			framed: false,
+			icon: 'close',
+			iconTitle: mw.msg("modal-close-button"),
+			flags: 'safe' 
+		} ];
 		
-		windowManager.addWindows( [ uploadDialog ] );
-		windowManager.openWindow( uploadDialog );
+		var dialogTitle = mw.msg("upload-files-dialog-title");
+		var dialogHeight = 250;
+		var materialDialog = CreateMaterialDialog( file, dialogActionButtons, dialogTitle, dialogHeight );
+		
+		materialDialog.getActionProcess = function ( action ) {
+			var dialog = this;
+
+			if ( action === 'upload' ) {
+				return new OO.ui.Process( function () {				
+					
+					try {
+						var fileToUpload = file.getValue();
+						
+						if (fileToUpload) {
+							upload.setFile( fileToUpload );
+							upload.setFilename( fileToUpload.name );
+							upload.upload();
+							
+							swal({   
+								title: mw.msg("uploaded-successfully"),
+								text: mw.msg("redirect-files-list"),
+								confirmButtonText: mw.msg("modal-ok-button")
+							}).then(function() {
+								window.location.href = "/special:fileList";
+								dialog.close();
+							});
+						}
+						else {
+							$.simplyToast(mw.msg("modal-popup-warning-file-missing"), 'danger');
+						}
+					}
+					catch (e) {
+						console.log(e);
+						dialog.close();
+					}	
+				} );
+			} 
+			
+			if ( action === 'close' ) {				
+				return new OO.ui.Process( function () {					
+					dialog.close();
+				} );
+			}
+		};
+    }
+    
 	
     $( function () {
-        loadDragAndDropUpload();
+		$( document ).on( "click", "#upload_toggle", function(e) {
+			e.preventDefault();
+			loadDragAndDropUpload();
+		});        
     });
-
+	
 }( mediaWiki, jQuery ) );

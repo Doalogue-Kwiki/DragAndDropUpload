@@ -4,5 +4,12 @@
 				"Hagai Asaban"
 			]
 		},
-		"drag-and-drop-upload-desc": "הרחבה לממשק העלאה באמצעות גרירה"
+		"drag-and-drop-upload-desc": "הרחבה לממשק העלאה באמצעות גרירה",
+		"modal-close-button": "סגור",
+		"modal-ok-button": "אישור",
+		"redirect-files-list": "למעבר לרשימת הקבצים לחץ אישור",
+		"uploaded-successfully": "הקובץ העלאה בהצלחה",
+		"modal-upload-label-button": "העלאה",
+		"upload-files-dialog-title": "העלאת קובצים",
+		"modal-popup-warning-file-missing": "לא נבחר שום קובץ להעלאה !"
 	}
