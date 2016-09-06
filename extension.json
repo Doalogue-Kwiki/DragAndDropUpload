@@ -1,0 +1,50 @@
+{
+	"name": "DragAndDropUpload",
+	"version": "0.1.0",
+	"author": [
+		"[http://kwiki.co.il Kwiki]",
+		"[[mw:user:HagaiAsaban|Hagai Asaban]]",
+        "[[mw:user:Yacohen|Yacohen]]"
+	],
+	"url": "doalogue-kwiki/DragAndDropUpload",
+	"descriptionmsg": "drag-and-drop-upload-desc",
+	"license-name": "GPL v2",
+	"type": "other",
+	"AutoloadClasses": {
+		"DragAndDropUploadHooks": "DragAndDropUpload.hooks.php"
+	},
+	"ExtensionMessagesFiles": {
+		"DragAndDropUploadAlias": "DragAndDropUpload.i18n.alias.php"
+	},
+	"Hooks": {
+		"BeforePageDisplay": [
+			"DragAndDropUploadHooks::onBeforePageDisplay"
+		]
+	},
+	"MessagesDirs": {
+		"DragAndDropUpload": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"ext.DragAndDropUpload": {
+			"dependencies": [
+				
+			],
+			"scripts": [
+				"modules/ext.DragAndDropUpload.js"
+			],
+			"styles": [
+				"modules/ext.DragAndDropUpload.css"
+			],
+			"messages": [
+
+			]			
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "DragAndDropUpload"
+	},
+	"manifest_version": 1
+}
